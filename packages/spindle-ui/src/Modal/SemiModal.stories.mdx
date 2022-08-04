@@ -1,0 +1,331 @@
+import { useEffect, useRef } from 'react';
+import { Description, Meta, Story, Source } from '@storybook/addon-docs/blocks';
+import { PopupModalExample, SheetModalExample, StyleOnlyPopupSmall, StyleOnlyPopupMedium, StyleOnlyPopupLarge, StyleOnlySheetSmall, StyleOnlySheetMedium, StyleOnlySheetLarge } from './SemiModal.stories.example';
+
+# SemiModal
+
+<Meta title="Modal/SemiModal" />
+
+![stability-experimental](https://img.shields.io/badge/stability-experimental-orange.svg)
+
+<Source
+  language='javascript'
+  code={`import { SemiModal } from '@openameba/spindle-ui/Modal'`}
+/>
+
+<Source
+  language='css'
+  code={`@import './node_modules/@openameba/spindle-ui/Modal/SemiModal.css'`}
+/>
+
+<Source
+  language='html'
+  code={`<link rel="stylesheet" href="https://unpkg.com/@openameba/spindle-ui/Modal/SemiModal.css">`}
+/>
+
+## Semi Modal
+
+Semi Modalは、画像を用いた訴求や複雑な操作をページから切り出して行うなど、画面を遷移させることなくモードを切り替えたいときに使用するコンポーネントです。Semi Modalは用途に応じた様々な利用を想定しているため、カスタマイズ性は高くなっています。以下の点に注意して利用してください。
+
+- type("popup" | "sheet")を指定することでModalの形状を変えることができます。デフォルトは "popup" です。
+- タイトルや画像など各要素を指定する際には`<SemiModal.Header>`、`<SemiModal.Contents>`など定義された要素を利用してください
+- レイアウトは画面サイズにより自動的に変更されます
+
+## 指定できる要素
+
+- `<SemiModal.Frame>` 大枠(dialog要素)です
+- `<SemiModal.Header>` タイトルを指定します
+- `<SemiModal.Contents>` モーダルで表示したい要素を指定します
+- `<SemiModal.Contents>` モーダル下部に固定したい要素を指定します
+- `<SemiModal.StyleOnly>` [HTMLDialogElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement)を利用しない場合に、`<SemiModal.Frame>`の代わりに利用します
+
+利用方法は、各サンプルコードを参照してください。
+
+## Dialog実装
+
+Spindle UIのSemi Modalは[HTMLDialogElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement)を利用して作られています。[非対応ブラウザ](https://caniuse.com/dialog)には[dialog polyfill](https://github.com/GoogleChrome/dialog-polyfill)と併用してください。また、Semi Modal内の`<dialog>`要素には`<form method="dialog">`要素が内包されているため、以下の動作が想定されています。
+
+- `<SemiModal>`は`open`プロパティの値を見て、開く・閉じるの動作を行います。`onClose`や`onCancel`のタイミングで`open`プロパティに`false`を指定し、ダイアログを閉じます
+  - `onCancel`イベントはEscapeキーを押されたなどデバイスや支援技術から伝達されます。特にそれらの動作を無効にする必要がない場合、通常は`open`プロパティを`false`にしてダイアログを閉じる動作を指定してください
+
+<Preview withSource="open">
+  <Story name="Popup - Normal">
+    <PopupModalExample />
+  </Story>
+</Preview>
+
+<Source
+  code={`
+function PopupModalExample() {
+  const [open, setOpen] = useState(false);
+  const dialogRef = useRef(null);
+  const handleOpenButtonClick = () => setOpen(true);
+  const handleDialogCancel = () => setOpen(false);
+  const handleDialogClose = () => setOpen(false);
+  useEffect(() => {
+    if (dialogRef.current) {
+      dialogPolyfill.registerDialog(dialogRef.current);
+    }
+  }, [dialogRef]);
+  return (
+    <>
+      <Button aria-haspopup="true" onClick={handleOpenButtonClick}>
+        Open Semi Modal
+      </Button>
+      <SemiModal.Frame
+        aria-describedby="dialog-description"
+        aria-labelledby="dialog-title"
+        ref={dialogRef}
+        open={open}
+        size="medium"
+        onCancel={handleDialogCancel}
+        onClose={handleDialogClose}
+      >
+        <SemiModal.Header id="dialog-title">About Ameba</SemiModal.Header>
+        <SemiModal.Contents id="dialog-description">
+          AmebaはAmebaブログをはじめ、最新の芸能人ニュースやマンガ・占いなど生きたコンテンツが集結した月間7,500万人が利用する国民的メディアサービスです。
+        </SemiModal.Contents>
+        <SemiModal.Footer id="styleonlycustomized-title">
+          About Ameba
+        </SemiModal.Footer>
+      </SemiModal.Frame>
+    </>
+  );
+}
+  `}
+/>
+
+<Preview withSource="open">
+  <Story name="Sheet - Normal">
+    <SheetModalExample />
+  </Story>
+</Preview>
+
+<Source
+  code={`
+function SheetModalExample() {
+  const [open, setOpen] = useState(false);
+  const dialogRef = useRef(null);
+  const handleOpenButtonClick = () => setOpen(true);
+  const handleDialogCancel = () => setOpen(false);
+  const handleDialogClose = () => setOpen(false);
+  useEffect(() => {
+    if (dialogRef.current) {
+      dialogPolyfill.registerDialog(dialogRef.current);
+    }
+  }, [dialogRef]);
+  return (
+    <>
+      <Button aria-haspopup="true" onClick={handleOpenButtonClick}>
+        Open Semi Modal
+      </Button>
+      <SemiModal.Frame
+        aria-describedby="dialog-description"
+        aria-labelledby="dialog-title"
+        ref={dialogRef}
+        open={open}
+        size="medium"
+        onCancel={handleDialogCancel}
+        onClose={handleDialogClose}
+      >
+        <SemiModal.Header id="dialog-title">About Ameba</SemiModal.Header>
+        <SemiModal.Contents id="dialog-description">
+          AmebaはAmebaブログをはじめ、最新の芸能人ニュースやマンガ・占いなど生きたコンテンツが集結した月間7,500万人が利用する国民的メディアサービスです。
+        </SemiModal.Contents>
+        <SemiModal.Footer id="styleonlycustomized-title">
+          About Ameba
+        </SemiModal.Footer>
+      </SemiModal.Frame>
+    </>
+  );
+}
+  `}
+/>
+
+## StyleOnly
+[HTMLDialogElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement)を利用しない場合には、`<SemiModal.StyleOnly>`を利用しSpindleで定義されたスタイルを流用できます。ダイアログの動作を独自で定義したい場合や他ライブラリの利用等でスタイルだけ使いたい場合を想定しています。
+
+<Source
+  code={`
+<SemiModal.StyleOnly
+  aria-describedby="styleonly-description"
+  aria-labelledby="styleonly-title"
+>
+  <SemiModal.Header id="styleonly-title">About Ameba</SemiModal.Header>
+  <SemiModal.Contents id="styleonly-description">
+    AmebaはAmebaブログをはじめ、最新の芸能人ニュースやマンガ・占いなど生きたコンテンツが集結した月間7,500万人が利用する国民的メディアサービスです。
+  </SemiModal.Contents>
+  <SemiModal.Footer id="styleonlycustomized-title">
+    About Ameba
+  </SemiModal.Footer>
+</SemiModal.StyleOnly>
+  `}
+/>
+<Source
+  code={`
+<SemiModal.StyleOnly
+  aria-describedby="styleonly-description"
+  aria-labelledby="styleonly-title"
+>
+  <SemiModal.Header id="styleonly-title">About Ameba</SemiModal.Header>
+  <SemiModal.Contents id="styleonly-description">
+    AmebaはAmebaブログをはじめ、最新の芸能人ニュースやマンガ・占いなど生きたコンテンツが集結した月間7,500万人が利用する国民的メディアサービスです。
+  </SemiModal.Contents>
+  <SemiModal.Footer id="styleonlycustomized-title">
+    About Ameba
+  </SemiModal.Footer>
+</SemiModal.StyleOnly>
+  `}
+/>
+
+## Popup - Large
+
+<Preview withSource="open">
+  <Story name="Popup - StyleOnly (Large)">
+    <StyleOnlyPopupLarge />
+  </Story>
+</Preview>
+
+<Source
+  code={`
+<SemiModal.StyleOnly
+  aria-describedby="styleonlymedium-description"
+  aria-labelledby="styleonlymedium-title"
+>
+  <SemiModal.Header id="dialog-title">
+    <SemiModal.Title>About Ameba</SemiModal.Title>
+  </SemiModal.Header>
+  <SemiModal.Contents id="styleonlymedium-description">
+    AmebaはAmebaブログをはじめ、最新の芸能人ニュースやマンガ・占いなど生きたコンテンツが集結した月間7,500万人が利用する国民的メディアサービスです。
+  </SemiModal.Contents>
+</SemiModal.StyleOnly>
+  `}
+/>
+
+## Popup - Medium
+
+<Preview withSource="open">
+  <Story name="Popup - StyleOnly (Medium)">
+    <StyleOnlyPopupMedium />
+  </Story>
+</Preview>
+
+<Source
+  code={`
+<SemiModal.StyleOnly
+  aria-describedby="styleonlymedium-description"
+  aria-labelledby="styleonlymedium-title"
+  size="medium"
+>
+  <SemiModal.Header id="dialog-title">
+    <SemiModal.Title>About Ameba</SemiModal.Title>
+  </SemiModal.Header>
+  <SemiModal.Contents id="styleonlymedium-description">
+    AmebaはAmebaブログをはじめ、最新の芸能人ニュースやマンガ・占いなど生きたコンテンツが集結した月間7,500万人が利用する国民的メディアサービスです。
+  </SemiModal.Contents>
+</SemiModal.StyleOnly>
+  `}
+/>
+
+## Popup - Small
+
+<Preview withSource="open">
+  <Story name="Popup - StyleOnly (Small)">
+    <StyleOnlyPopupSmall />
+  </Story>
+</Preview>
+
+<Source
+  code={`
+<SemiModal.StyleOnly
+  aria-describedby="styleonlymedium-description"
+  aria-labelledby="styleonlymedium-title"
+  size="small"
+>
+  <SemiModal.Header id="dialog-title">
+    <SemiModal.Title>About Ameba</SemiModal.Title>
+  </SemiModal.Header>
+  <SemiModal.Contents id="styleonlymedium-description">
+    AmebaはAmebaブログをはじめ、最新の芸能人ニュースやマンガ・占いなど生きたコンテンツが集結した月間7,500万人が利用する国民的メディアサービスです。
+  </SemiModal.Contents>
+</SemiModal.StyleOnly>
+  `}
+/>
+
+## Sheet - Large
+
+<Preview withSource="open">
+  <Story name="Sheet - StyleOnly (Large)">
+    <StyleOnlySheetLarge />
+  </Story>
+</Preview>
+
+<Source
+  code={`
+<SemiModal.StyleOnly
+  aria-describedby="styleonlymedium-description"
+  aria-labelledby="styleonlymedium-title"
+  size="large"
+  type="sheet"
+>
+  <SemiModal.Header id="dialog-title">
+    <SemiModal.Title>About Ameba</SemiModal.Title>
+  </SemiModal.Header>
+  <SemiModal.Contents id="styleonlymedium-description">
+    AmebaはAmebaブログをはじめ、最新の芸能人ニュースやマンガ・占いなど生きたコンテンツが集結した月間7,500万人が利用する国民的メディアサービスです。
+  </SemiModal.Contents>
+</SemiModal.StyleOnly>
+  `}
+/>
+
+## Sheet - Medium
+
+<Preview withSource="open">
+  <Story name="Sheet - StyleOnly (Medium)">
+    <StyleOnlySheetMedium />
+  </Story>
+</Preview>
+
+<Source
+  code={`
+<SemiModal.StyleOnly
+  aria-describedby="styleonlymedium-description"
+  aria-labelledby="styleonlymedium-title"
+  size="medium"
+  type="sheet"
+>
+  <SemiModal.Header id="dialog-title">
+    <SemiModal.Title>About Ameba</SemiModal.Title>
+  </SemiModal.Header>
+  <SemiModal.Contents id="styleonlymedium-description">
+    AmebaはAmebaブログをはじめ、最新の芸能人ニュースやマンガ・占いなど生きたコンテンツが集結した月間7,500万人が利用する国民的メディアサービスです。
+  </SemiModal.Contents>
+</SemiModal.StyleOnly>
+  `}
+/>
+
+## Sheet - Small
+
+<Preview withSource="open">
+  <Story name="Sheet - StyleOnly (Small)">
+    <StyleOnlySheetSmall />
+  </Story>
+</Preview>
+
+<Source
+  code={`
+<SemiModal.StyleOnly
+  aria-describedby="styleonlymedium-description"
+  aria-labelledby="styleonlymedium-title"
+  size="small"
+  type="sheet"
+>
+  <SemiModal.Header id="dialog-title">
+    <SemiModal.Title>About Ameba</SemiModal.Title>
+  </SemiModal.Header>
+  <SemiModal.Contents id="styleonlymedium-description">
+    AmebaはAmebaブログをはじめ、最新の芸能人ニュースやマンガ・占いなど生きたコンテンツが集結した月間7,500万人が利用する国民的メディアサービスです。
+  </SemiModal.Contents>
+</SemiModal.StyleOnly>
+  `}
+/>
