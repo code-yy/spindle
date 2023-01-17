@@ -3,10 +3,6 @@
  * SemiModal
  * NOTE: Styles can be overridden with "--SemiModal-*" variables
 */
-:root {
-  --SemiModal-image-border: 1px inset var(--color-border-low-emphasis);
-  --SemiModal-image-borderRadius: 8px;
-}
 
 .spui-SemiModal {
   background: var(--color-surface-primary);
@@ -17,6 +13,7 @@
   height: fit-content;
   padding: 0;
   position: fixed;
+  width: fit-content;
 }
 
 .spui-SemiModal[data-type='sheet'] {
@@ -49,10 +46,14 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .spui-SemiModal[open]:not(.spui-SemiModal--closing),
-  .spui-SemiModal[open]:not(.spui-SemiModal--closing).spui-SemiModal::backdrop,
-  .spui-SemiModal--closing,
-  .spui-SemiModal--closing.spui-SemiModal::backdrop {
+  .spui-SemiModal[data-type='popup'][open]:not(.spui-SemiModal--closing),
+  .spui-SemiModal[data-type='popup'][open]:not(.spui-SemiModal--closing).spui-SemiModal::backdrop,
+  .spui-SemiModal[data-type='popup'].spui-SemiModal--closing,
+  .spui-SemiModal--closing.spui-SemiModal[data-type='popup']::backdrop,
+  .spui-SemiModal[data-type='sheet'][open]:not(.spui-SemiModal--closing),
+  .spui-SemiModal[data-type='sheet'][open]:not(.spui-SemiModal--closing).spui-SemiModal::backdrop,
+  .spui-SemiModal[data-type='sheet'].spui-SemiModal--closing,
+  .spui-SemiModal--closing.spui-SemiModal[data-type='sheet']::backdrop {
     /* Do not remove this animation to detect animationend in JavaScript */
     animation-duration: 0.01s;
   }
@@ -110,7 +111,8 @@ html.spui-SemiModal--open {
   color: var(--color-text-medium-emphasis);
   display: flex;
   flex-direction: column;
-  padding: 0 16px 0 36px;
+  flex-grow: 1;
+  padding: 0 16px 36px 36px;
 }
 
 .spui-SemiModal-header {
@@ -167,8 +169,7 @@ html.spui-SemiModal--open {
 .spui-SemiModal-footer {
   background-color: var(--color-surface-primary);
   bottom: 0;
-  padding: 24px 20px 36px 0;
-  position: sticky;
+  padding: 24px 20px 0 0;
 }
 
 .spui-SemiModal-footer:empty {
@@ -176,30 +177,34 @@ html.spui-SemiModal--open {
 }
 
 @media screen and (min-width: 768px) {
-  .spui-SemiModal[data-type='popup'][data-size='small'] {
+  .spui-SemiModal[data-type='popup'][data-size='small'] .spui-SemiModal-frame {
     max-height: 400px;
     width: 480px;
   }
 
-  .spui-SemiModal[data-type='popup'][data-size='medium'] {
+  .spui-SemiModal[data-type='popup'][data-size='medium'] .spui-SemiModal-frame {
     max-height: 700px;
     width: 840px;
   }
 
-  .spui-SemiModal[data-type='popup'][data-size='large'] {
+  .spui-SemiModal[data-type='popup'][data-size='large'] .spui-SemiModal-frame {
     max-height: 840px;
     width: 1024px;
   }
 
-  .spui-SemiModal[data-type='sheet'][data-size='small'] {
+  .spui-SemiModal[data-type='sheet'] .spui-SemiModal-frame {
+    max-height: calc(100vh - 200px);
+  }
+
+  .spui-SemiModal[data-type='sheet'][data-size='small'] .spui-SemiModal-frame {
     width: 480px;
   }
 
-  .spui-SemiModal[data-type='sheet'][data-size='medium'] {
+  .spui-SemiModal[data-type='sheet'][data-size='medium'] .spui-SemiModal-frame {
     width: 840px;
   }
 
-  .spui-SemiModal[data-type='sheet'][data-size='large'] {
+  .spui-SemiModal[data-type='sheet'][data-size='large'] .spui-SemiModal-frame {
     width: 1024px;
   }
 }
@@ -207,13 +212,21 @@ html.spui-SemiModal--open {
 @media screen and (max-width: 768px) {
   .spui-SemiModal[data-type='sheet'] {
     margin: auto 0 0;
-    /* useragent stylesheetによるmax-wifth指定の上書き */
+    /* useragent stylesheetによるmax-width指定の上書き */
     max-width: 100%;
     width: 100%;
   }
 
+  .spui-SemiModal[data-type='sheet'] .spui-SemiModal-frame {
+    max-height: calc(100vh - (20px * 2));
+  }
+
   .spui-SemiModal[data-type='popup'] {
-    margin: 20px;
+    margin: auto 20px;
+  }
+
+  .spui-SemiModal[data-type='popup'] .spui-SemiModal-frame {
+    max-height: calc(100vh - (20px * 2));
   }
 
   .spui-SemiModal-contents {
@@ -222,7 +235,7 @@ html.spui-SemiModal--open {
   }
 
   .spui-SemiModal-frame {
-    padding: 0px 20px;
+    padding: 0 20px 24px;
   }
 
   .spui-SemiModal-header {
@@ -239,7 +252,7 @@ html.spui-SemiModal--open {
   }
 
   .spui-SemiModal-footer {
-    padding: 16px 0 24px;
+    padding: 16px 0 0;
   }
 }
 
