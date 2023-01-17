@@ -94,17 +94,16 @@ export function SheetModalExample() {
 export function StyleOnlyPopupLarge() {
   return (
     <SemiModal.StyleOnly
-      aria-describedby="styleonlymedium-description"
-      aria-labelledby="styleonlymedium-title"
+      aria-describedby="styleOnlyLarge-description"
+      aria-labelledby="styleOnlyLarge-title"
       style={{ position: 'relative' }}
     >
       <SemiModal.Header id="dialog-title">
         <SemiModal.Title>About Ameba</SemiModal.Title>
       </SemiModal.Header>
-      <SemiModal.Contents id="styleonlymedium-description">
+      <SemiModal.Contents id="styleOnlyLarge-description">
         AmebaはAmebaブログをはじめ、最新の芸能人ニュースやマンガ・占いなど生きたコンテンツが集結した月間7,500万人が利用する国民的メディアサービスです。
       </SemiModal.Contents>
-      <SemiModal.Footer></SemiModal.Footer>
     </SemiModal.StyleOnly>
   );
 }
@@ -112,20 +111,17 @@ export function StyleOnlyPopupLarge() {
 export function StyleOnlyPopupMedium() {
   return (
     <SemiModal.StyleOnly
-      aria-describedby="styleonlymedium-description"
-      aria-labelledby="styleonlymedium-title"
+      aria-describedby="styleOnlyMedium-description"
+      aria-labelledby="styleOnlyMedium-title"
       size="medium"
       style={{ position: 'relative' }}
     >
       <SemiModal.Header id="dialog-title">
         <SemiModal.Title>About Ameba</SemiModal.Title>
       </SemiModal.Header>
-      <SemiModal.Contents id="styleonlymedium-description">
+      <SemiModal.Contents id="styleOnlyMedium-description">
         AmebaはAmebaブログをはじめ、最新の芸能人ニュースやマンガ・占いなど生きたコンテンツが集結した月間7,500万人が利用する国民的メディアサービスです。
       </SemiModal.Contents>
-      <SemiModal.Footer>
-        <Button layout="fullWidth">確認する</Button>
-      </SemiModal.Footer>
     </SemiModal.StyleOnly>
   );
 }
@@ -133,20 +129,17 @@ export function StyleOnlyPopupMedium() {
 export function StyleOnlyPopupSmall() {
   return (
     <SemiModal.StyleOnly
-      aria-describedby="styleonlymedium-description"
-      aria-labelledby="styleonlymedium-title"
+      aria-describedby="styleOnlySmall-description"
+      aria-labelledby="styleOnlySmall-title"
       size="small"
       style={{ position: 'relative' }}
     >
       <SemiModal.Header id="dialog-title">
         <SemiModal.Title>About Ameba</SemiModal.Title>
       </SemiModal.Header>
-      <SemiModal.Contents id="styleonlymedium-description">
+      <SemiModal.Contents id="styleOnlySmall-description">
         AmebaはAmebaブログをはじめ、最新の芸能人ニュースやマンガ・占いなど生きたコンテンツが集結した月間7,500万人が利用する国民的メディアサービスです。
       </SemiModal.Contents>
-      <SemiModal.Footer>
-        <Button layout="fullWidth">確認する</Button>
-      </SemiModal.Footer>
     </SemiModal.StyleOnly>
   );
 }
@@ -154,18 +147,17 @@ export function StyleOnlyPopupSmall() {
 export function StyleOnlySheetLarge() {
   return (
     <SemiModal.StyleOnly
-      aria-describedby="styleonlymedium-description"
-      aria-labelledby="styleonlymedium-title"
+      aria-describedby="styleOnlyLarge-description"
+      aria-labelledby="styleOnlyLarge-title"
       type="sheet"
       style={{ position: 'relative', transform: 'translateY(0)', margin: 0 }}
     >
       <SemiModal.Header id="dialog-title">
         <SemiModal.Title>About Ameba</SemiModal.Title>
       </SemiModal.Header>
-      <SemiModal.Contents id="styleonlymedium-description">
+      <SemiModal.Contents id="styleOnlyLarge-description">
         AmebaはAmebaブログをはじめ、最新の芸能人ニュースやマンガ・占いなど生きたコンテンツが集結した月間7,500万人が利用する国民的メディアサービスです。
       </SemiModal.Contents>
-      <SemiModal.Footer></SemiModal.Footer>
     </SemiModal.StyleOnly>
   );
 }
@@ -173,8 +165,8 @@ export function StyleOnlySheetLarge() {
 export function StyleOnlySheetMedium() {
   return (
     <SemiModal.StyleOnly
-      aria-describedby="styleonlymedium-description"
-      aria-labelledby="styleonlymedium-title"
+      aria-describedby="styleOnlyMedium-description"
+      aria-labelledby="styleOnlyMedium-title"
       size="medium"
       type="sheet"
       style={{ position: 'relative', transform: 'translateY(0)', margin: 0 }}
@@ -182,12 +174,9 @@ export function StyleOnlySheetMedium() {
       <SemiModal.Header id="dialog-title">
         <SemiModal.Title>About Ameba</SemiModal.Title>
       </SemiModal.Header>
-      <SemiModal.Contents id="styleonlymedium-description">
+      <SemiModal.Contents id="styleOnlyMedium-description">
         AmebaはAmebaブログをはじめ、最新の芸能人ニュースやマンガ・占いなど生きたコンテンツが集結した月間7,500万人が利用する国民的メディアサービスです。
       </SemiModal.Contents>
-      <SemiModal.Footer>
-        <Button layout="fullWidth">確認する</Button>
-      </SemiModal.Footer>
     </SemiModal.StyleOnly>
   );
 }
@@ -195,8 +184,8 @@ export function StyleOnlySheetMedium() {
 export function StyleOnlySheetSmall() {
   return (
     <SemiModal.StyleOnly
-      aria-describedby="styleonlymedium-description"
-      aria-labelledby="styleonlymedium-title"
+      aria-describedby="styleOnlySmall-description"
+      aria-labelledby="styleOnlySmall-title"
       size="small"
       type="sheet"
       style={{ position: 'relative', transform: 'translateY(0)', margin: 0 }}
@@ -204,12 +193,9 @@ export function StyleOnlySheetSmall() {
       <SemiModal.Header id="dialog-title">
         <SemiModal.Title>About Ameba</SemiModal.Title>
       </SemiModal.Header>
-      <SemiModal.Contents id="styleonlymedium-description">
+      <SemiModal.Contents id="styleOnlySmall-description">
         AmebaはAmebaブログをはじめ、最新の芸能人ニュースやマンガ・占いなど生きたコンテンツが集結した月間7,500万人が利用する国民的メディアサービスです。
       </SemiModal.Contents>
-      <SemiModal.Footer>
-        <Button layout="fullWidth">確認する</Button>
-      </SemiModal.Footer>
     </SemiModal.StyleOnly>
   );
 }
