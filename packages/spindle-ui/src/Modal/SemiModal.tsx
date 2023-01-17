@@ -1,5 +1,6 @@
 import React, {
   forwardRef,
+  ReactNode,
   useCallback,
   useEffect,
   useRef,
@@ -132,7 +133,10 @@ const Title = ({ children, ...rest }: React.ComponentProps<'p'>) => {
   );
 };
 
-const Header = ({ children, ...rest }: React.ComponentProps<'header'>) => {
+const Header = ({
+  children,
+  ...rest
+}: React.ComponentProps<'header'> & { children: ReactNode }) => {
   return (
     <header role="heading" className={`${BLOCK_NAME}-header`} {...rest}>
       {children}
@@ -145,7 +149,10 @@ const Header = ({ children, ...rest }: React.ComponentProps<'header'>) => {
   );
 };
 
-const Contents = ({ children, ...rest }: React.ComponentProps<'div'>) => {
+const Contents = ({
+  children,
+  ...rest
+}: React.ComponentProps<'div'> & { children: ReactNode }) => {
   return (
     <div className={`${BLOCK_NAME}-contents`} {...rest}>
       <div>{children}</div>
