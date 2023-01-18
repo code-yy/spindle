@@ -97,7 +97,7 @@ html.spui-SemiModal--open {
 .spui-SemiModal
   :is(.spui-Button, .spui-LinkButton, .spui-IconButton, .spui-SubtleButton):focus {
   box-shadow: 0 0 0 1px var(--color-surface-secondary),
-    0 0 0 3px var(--color-focus-clarity);
+    0 0 0 2px var(--color-focus-clarity);
   outline: none;
 }
 
@@ -179,17 +179,14 @@ html.spui-SemiModal--open {
 @media screen and (min-width: 768px) {
   .spui-SemiModal[data-type='popup'][data-size='small'] .spui-SemiModal-frame {
     max-height: 400px;
-    width: 480px;
   }
 
   .spui-SemiModal[data-type='popup'][data-size='medium'] .spui-SemiModal-frame {
     max-height: 700px;
-    width: 840px;
   }
 
   .spui-SemiModal[data-type='popup'][data-size='large'] .spui-SemiModal-frame {
     max-height: 840px;
-    width: 1024px;
   }
 
   .spui-SemiModal[data-type='sheet'] .spui-SemiModal-frame {
@@ -197,15 +194,15 @@ html.spui-SemiModal--open {
   }
 
   .spui-SemiModal[data-type='sheet'][data-size='small'] .spui-SemiModal-frame {
-    width: 480px;
+    max-width: 480px;
   }
 
   .spui-SemiModal[data-type='sheet'][data-size='medium'] .spui-SemiModal-frame {
-    width: 840px;
+    max-width: 840px;
   }
 
   .spui-SemiModal[data-type='sheet'][data-size='large'] .spui-SemiModal-frame {
-    width: 1024px;
+    max-width: 1024px;
   }
 }
 

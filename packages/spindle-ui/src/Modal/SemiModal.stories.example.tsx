@@ -75,7 +75,7 @@ export function SheetModalExample() {
         onClose={handleDialogClose}
       >
         <SemiModal.Header id="dialog-title">
-          <SemiModal.Title></SemiModal.Title>
+          <SemiModal.Title>About Ameba</SemiModal.Title>
         </SemiModal.Header>
         <SemiModal.Contents id="dialog-description">
           AmebaはAmebaブログをはじめ、最新の芸能人ニュースやマンガ・占いなど生きたコンテンツが集結した月間7,500万人が利用する国民的メディアサービスです。
